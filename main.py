@@ -357,7 +357,7 @@ def save_check():
 #open the graph window logic
 graph_opened = False
 def open_graph():
-    for t in range(24,0,-1):
+    for t in range(23,0,-1):
         if dic[t]>0:
             last_time_added = t
             break
