@@ -356,7 +356,9 @@ def save_check():
 
 #open the graph window logic
 graph_opened = False
+
 def open_graph():
+    last_time_added = 23
     for t in range(23,0,-1):
         if dic[t]>0:
             last_time_added = t
