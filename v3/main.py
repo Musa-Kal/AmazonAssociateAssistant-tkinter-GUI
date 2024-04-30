@@ -196,43 +196,35 @@ def f1_clear_func():
 
 
 #all frame2 functions
-def sioc_question():
+def typeOfAmountToPick(task: str):
+    typeToGet = "Layers"
+    if task == "singles":
+        typeToGet = "Boxes"
+
     qe1 = q_entry1.get()
     qe2 = q_entry2.get()
+    
     if qe1.isdigit() and qe2.isdigit():
         qe1 = int(qe1)
         qe2 = int(qe2)
-        layers = qe1/qe2
-        product = qe1-(int(layers)*qe2)
-        get1.config(text=f"Layers to get: {int(layers)}")
-        get2.config(text=f"Products to get: {product}")
-        q_entry2.delete(0,END)
+
+        if qe1 >= qe2:
+            group = qe1//qe2
+            product = qe1-(group*qe2)
+            get1.config(text=f"{typeToGet} to get: {group}")
+            get2.config(text=f"Products to get: {product}")
+            q_entry2.delete(0,END)
+        else:
+            q_entry1.delete(0,END)
+            q_entry2.delete(0,END)
+            q_entry1.insert(0, 'Amoun to pick must be greater then or equal layers or boxes')
+
+        
     else:
         q_entry1.delete(0,END)
         q_entry2.delete(0,END)
         q_entry1.insert(0, 'Please input a number')
 
-def singles_question():
-    qe1 = q_entry1.get()
-    qe2 = q_entry2.get()
-    if qe1.isdigit() and qe2.isdigit():
-        qe1 = int(qe1)
-        qe2 = int(qe2)
-        boxes = qe1/qe2
-        deci_check = boxes-int(boxes)
-        if deci_check > 0:
-            products = deci_check*qe2
-            get1.config(text=f"Boxes to get: {int(boxes)}")
-            get2.config(text=f"Products to get: {round(products)}")
-            q_entry2.delete(0,END)
-        else:
-            get1.config(text=f"Boxes to get: {int(boxes)}")
-            get2.config(text="Products to get: 0")
-            q_entry2.delete(0,END)
-    else:
-        q_entry1.delete(0,END)
-        q_entry2.delete(0,END)
-        q_entry1.insert(0, 'Please input a number')
 
 def clear_func():
     q_entry1.delete(0,END)
@@ -407,8 +399,8 @@ del_cmnd.grid(row=2, column=4)
 
 
 #question/frame2 system/logic
-sioc_q = Button(frame2, text="SIOC Question", borderwidth=5, width=13, height=3, fg="Green", bg="#d9ffd2", command=sioc_question)
-sing_q = Button(frame2, text="Singles Question", borderwidth=5, width=13, height=3, fg="Blue", bg="#d2d6ff", command=singles_question)
+sioc_q = Button(frame2, text="SIOC Question", borderwidth=5, width=13, height=3, fg="Green", bg="#d9ffd2", command=lambda: typeOfAmountToPick("sioc"))
+sing_q = Button(frame2, text="Singles Question", borderwidth=5, width=13, height=3, fg="Blue", bg="#d2d6ff", command=lambda: typeOfAmountToPick("singles"))
 
 f2_clear_b = Button(frame2, text="Clear", borderwidth=5, width=7, height=2, bg="grey", command=clear_func)
 
