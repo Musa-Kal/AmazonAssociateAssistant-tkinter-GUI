@@ -273,7 +273,7 @@ def create_func():
     wb = Workbook()
     ws = wb.active
     ws.title = "Record"
-    ws.append(["Date", "Multi", "SIOC", "Singles", "Total"])
+    ws.append(["Date", "Multi", "SIOC", "Singles", "Total Packed"])
     for col in range(1,6):
         ws[get_column_letter(col)+'1'].font=Font(bold=True)
     wb.save('C:\\'+pathToExcel)
