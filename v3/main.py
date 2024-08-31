@@ -44,32 +44,7 @@ tab.add(frame2, text="Get Pick Amount")
 tab.add(frame3, text="Details")
 
 
-amountPackedByTime = {
-        0:0,
-        1:0,
-        2:0,
-        3:0,
-        4:0,
-        5:0,
-        6:0,
-        7:0,
-        8:0,
-        9:0,
-        10:0,
-        11:0,
-        12:0,
-        13:0,
-        14:0,
-        15:0,
-        16:0,
-        17:0,
-        18:0,
-        19:0,
-        20:0,
-        21:0,
-        22:0,
-        23:0
-}
+amountPackedByTime = [0] * 24
 
 class Task:
     def __init__(self, name: str, color1: str, color2: str) -> None:
@@ -306,13 +281,13 @@ def open_graph():
     graph_info = {'Time (24H Format)': [],
                   'Units Packed': []}
     first_time_added = True
-    for k in amountPackedByTime.keys():
-        if amountPackedByTime[k] == 0 and first_time_added:
+    for t in range(len(amountPackedByTime)):
+        if amountPackedByTime[t] == 0 and first_time_added:
             continue
-        graph_info['Time (24H Format)'].append(k)
-        graph_info['Units Packed'].append(amountPackedByTime[k])
+        graph_info['Time (24H Format)'].append(t)
+        graph_info['Units Packed'].append(amountPackedByTime[t])
         first_time_added = False
-        if not first_time_added and k == last_time_added:
+        if not first_time_added and t == last_time_added:
             break
     global canvas, top, graph_opened, df
     df = pd.DataFrame(graph_info)
